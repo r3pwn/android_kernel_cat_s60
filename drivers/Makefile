@@ -170,3 +170,8 @@ obj-$(CONFIG_ESOC)		+= esoc/
 obj-$(CONFIG_BIF)		+= bif/
 obj-$(CONFIG_SENSORS)		+= sensors/
 obj-$(CONFIG_SENSORS_SSC)	+= sensors/
+obj-y				+= cei/
+
+ifeq ($(TARGET_BUILD_VARIANT),user)
+	KBUILD_CFLAGS += -DUSER_BUILD
+endif
