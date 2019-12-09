@@ -1,8 +1,8 @@
 /*
  *
- * Id: stk3x1x.h
+ * $Id: stk3x1x.h
  *
- * Copyright (C) 2012 Lex Hsieh     <lex_hsieh@sitronix.com.tw>
+ * Copyright (C) 2012~2014 Lex Hsieh	 <lex_hsieh@sensortek.com.tw>
  *
  * This file is subject to the terms and conditions of the GNU General Public
  * License.  See the file COPYING in the main directory of this archive for
@@ -13,7 +13,8 @@
 #define __STK3X1X_H__
 
 /* platform data */
-struct stk3x1x_platform_data {
+struct stk3x1x_platform_data
+{
 	uint8_t state_reg;
 	uint8_t psctrl_reg;
 	uint8_t alsctrl_reg;
@@ -24,7 +25,7 @@ struct stk3x1x_platform_data {
 	int int_pin;
 	uint32_t transmittance;
 	uint32_t int_flags;
-	bool use_fir;
 };
 
-#endif /* __STK3X1X_H__ */
+
+#endif // __STK3X1X_H__
