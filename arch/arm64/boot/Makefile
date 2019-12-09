@@ -14,7 +14,11 @@
 # Based on the ia64 boot/Makefile.
 #
 
+ifneq ($(CEI_BUILD_PROJECT),)
+include $(srctree)/arch/arm64/boot/dts/$(CEI_BUILD_PROJECT)/Makefile
+else
 include $(srctree)/arch/arm64/boot/dts/qcom/Makefile
+endif
 
 targets := Image Image.gz
 

@@ -212,7 +212,7 @@
 		qcom,msm-vdd-wsa-switch-current = <5000>;
 	};
 
-	i2c@78b6000 {
+	/*i2c@78b6000 {
 		wsa881x-i2c-codec@e {
 			compatible = "qcom,wsa881x-i2c-codec";
 			reg = <0x0e>;
@@ -283,7 +283,7 @@
 			compatible = "qcom,wsa881x-i2c-codec";
 			reg = <0x45>;
 		};
-	};
+	};*/
 };
 
 &tlmm_pinmux {

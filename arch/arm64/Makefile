@@ -73,8 +73,13 @@ zinstall install: vmlinux
 	$(Q)$(MAKE) $(build)=$(boot)/dts $(boot)/dts/$@
 
 dtbs: scripts
+ifneq ($(CEI_BUILD_PROJECT),)
+	$(Q)$(MAKE) $(build)=$(boot)/dts dtbs
+	$(Q)$(MAKE) $(build)=$(boot)/dts/$(CEI_BUILD_PROJECT) dtbs
+else
 	$(Q)$(MAKE) $(build)=$(boot)/dts dtbs
 	$(Q)$(MAKE) $(build)=$(boot)/dts/qcom dtbs
+endif
 
 PHONY += vdso_install
 vdso_install:

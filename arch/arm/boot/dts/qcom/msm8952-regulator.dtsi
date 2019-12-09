@@ -429,14 +429,14 @@
 			<0  0     0>,
 			<0  0     0>,
 			<0  0     0>,
-			<0  0 15000>, /* TURBO + 15mv */
+			<0  50000 65000>, /* TURBO + 15mv */
 			<0  0  5000>, /* TURBO + 5mv  */
 			<0  0     0>;
 		qcom,cpr-quotient-adjustment =
 			<0 (-132) (-132)>, /* NOM - 80mv, TURBO - 80mv */
 			<0    0       17>, /* TURBO + 10mv */
 			<0    42      66>, /* NOM + 25mv, TURBO + 40mv */
-			<0    16      74>, /* NOM + 10mv, TURBO + 45mv */
+			<0    83      83>, /* NOM + 10mv, TURBO + 45mv */
 			<0    16      33>, /* NOM + 10mv, TURBO + 20mv */
 			<0    0        0>;
 		qcom,cpr-floor-to-ceiling-max-range =

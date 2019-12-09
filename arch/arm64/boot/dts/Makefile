@@ -4,8 +4,11 @@ dtb-$(CONFIG_ARCH_XGENE) += apm-mustang.dtb
 targets += dtbs
 
 #used for cleaning - not building
+ifneq ($(CEI_BUILD_PROJECT),)
+subdir- := dts/$(CEI_BUILD_PROJECT)
+else
 subdir- := dts/qcom
-
+endif
 
 dtbs: $(addprefix $(obj)/, $(DTB_LIST))
 
