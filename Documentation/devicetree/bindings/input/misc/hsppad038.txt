@@ -1,0 +1,7 @@
+ALPS hsppad038 barometer driver
+
+Required properties:
+
+ - compatible           : Should be "alps,hsppad038"
+ - reg                          : i2c address of the device.
+ - vdd-supply           : Analog power supply needed to power up the device.
