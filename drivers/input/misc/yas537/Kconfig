@@ -1,0 +1,10 @@
+config SENSORS_YAS_MAGNETOMETER_INPUT
+	tristate "Yamaha 3-Axis Magnetometer"
+	help
+	  Say Y here to add support for the Yamaha 3-Axis Magnetometer.
+
+config SENSORS_YAS_ACCELEROMETER_INPUT
+	tristate "Yamaha 3-Axis Accelerometer"
+	help
+	  Say Y here to add support for the Yamaha 3-Axis Accelerometer.
+

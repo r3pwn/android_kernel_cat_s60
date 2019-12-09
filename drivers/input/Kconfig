@@ -195,7 +195,7 @@ config INPUT_KEYCOMBO
 
 config SENSORS_HALL
 	bool "Hall sensor"
-	depends on INPUT
+	default y
 	---help---
 	 Say y here if you want to use this hall sensor driver, it
 	 is like a switch. For example, lid.

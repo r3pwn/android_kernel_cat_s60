@@ -28,6 +28,8 @@
 #include <linux/mutex.h>
 #include <linux/rcupdate.h>
 #include "input-compat.h"
+#include <linux/string.h>
+#include <linux/cei_hw_id.h>
 
 MODULE_AUTHOR("Vojtech Pavlik <vojtech@suse.cz>");
 MODULE_DESCRIPTION("Input core");
@@ -1009,6 +1011,7 @@ static int input_bits_to_string(char *buf, int buf_size,
 
 	if (INPUT_COMPAT_TEST) {
 		u32 dword = bits >> 32;
+
 		if (dword || !skip_empty)
 			len += snprintf(buf, buf_size, "%x ", dword);
 
@@ -2035,6 +2038,12 @@ int input_register_device(struct input_dev *dev)
 	unsigned int packet_size;
 	const char *path;
 	int error;
+	const char *ALS = "stk3x1x-ls";
+	const char *PS = "proximity";
+	const char *PRS = "alps_pressure";
+	int hwid;
+
+	hwid = get_cei_hw_id();
 
 	if (dev->devres_managed) {
 		devres = devres_alloc(devm_input_device_unregister,
@@ -2083,8 +2092,20 @@ int input_register_device(struct input_dev *dev)
 	if (!dev->setkeycode)
 		dev->setkeycode = input_default_setkeycode;
 
-	dev_set_name(&dev->dev, "input%ld",
-		     (unsigned long) atomic_inc_return(&input_no) - 1);
+	if (hwid < DVT2) {
+		if (strcmp(dev->name, ALS) == 0)
+			dev_set_name(&dev->dev, "ALS");
+		else if (strcmp(dev->name, PS) == 0)
+			dev_set_name(&dev->dev, "PS");
+		else if (strcmp(dev->name, PRS) == 0)
+			dev_set_name(&dev->dev, "PRS");
+		else
+			dev_set_name(&dev->dev, "input%ld",
+					(unsigned long) atomic_inc_return(&input_no) - 1);
+	} else{
+		dev_set_name(&dev->dev, "input%ld",
+				(unsigned long) atomic_inc_return(&input_no) - 1);
+	}
 
 	error = device_add(&dev->dev);
 	if (error)

@@ -863,5 +863,19 @@ config SENSORS_ISL29044A
 	help
 	 This option enables support for the INTERSIL ISL29044A P/L sensor.
 
+config INPUT_PRS_DEBUG
+	boolean "Debug support for ALPS Pressure Sensor drivers"
+	default n
+	depends on DEBUG_KERNEL
+	help
+	  Say "yes" to enable debug messaging.
+
+config INPUT_HSPPAD038
+	tristate "HSPPAD038 Pressure Sensor Driver"
+	default n
+	depends on I2C
+	help
+	  Say yes here to build support for ALPS Electric HSPPAD038 Pressure sensor.
+
 endif
 

@@ -51,6 +51,9 @@ struct gpio_keys_drvdata {
 	struct gpio_button_data data[0];
 };
 
+bool sos_is_pressed = false;
+unsigned int pressed_times = 0;
+
 /*
  * SYSFS interface for enabling/disabling keys and switches:
  *
@@ -330,6 +333,26 @@ static void gpio_keys_gpio_report_event(struct gpio_button_data *bdata)
 	struct input_dev *input = bdata->input;
 	unsigned int type = button->type ?: EV_KEY;
 	int state = (gpio_get_value_cansleep(button->gpio) ? 1 : 0) ^ button->active_low;
+
+	if (sos_is_pressed == true) {
+		if (button->code == 580 && state == 1)
+			pressed_times++;
+#ifdef USER_BUILD
+		if (pressed_times == 6)
+			pressed_times = 0;
+#else
+		if (pressed_times == 6)
+			BUG();
+#endif
+	}
+
+	if (button->code == 264 && state == 1)
+		sos_is_pressed = true;
+
+	if (button->code == 264 && state == 0) {
+		sos_is_pressed = false;
+		pressed_times = 0;
+	}
 
 	if (type == EV_ABS) {
 		if (state)
@@ -816,6 +839,7 @@ static int gpio_keys_probe(struct platform_device *pdev)
 
 	device_init_wakeup(&pdev->dev, wakeup);
 
+	__set_bit(INPUT_PROP_NO_DUMMY_RELEASE, input->propbit);
 	return 0;
 
  fail3:

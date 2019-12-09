@@ -89,3 +89,7 @@ endif
 
 obj-$(CONFIG_SENSORS_MC3430)	+= mc3xxx.o
 obj-$(CONFIG_SENSORS_ISL29044A)	+= isl29044a.o
+ccflags-$(CONFIG_INPUT_PRS_DEBUG)  += -DALPS_PRS_DEBUG
+obj-$(CONFIG_INPUT_HSPPAD038)      += hsppad038_i2c.o
+obj-y	+= lsm6ds3/
+obj-y	+= yas537/
